@@ -17,11 +17,11 @@ files = [ x for x in listdir(path) if re.search('\.csv', x) and isfile(join(path
 line1 = True
 for file in files:
     with open(path + file) as line:
-        header = [ x.strip('\r\n') for x in line.readline().split(';') ]
         data = [[ re.sub(',', '.', x.strip('\r\n')) for x in y.split(';')] for y in line ] 
         sample = [ x.strip('.csv') for x in file.split(' ') ]
         with open('indiv_seeds_processed.tbl', 'ab') as output:
             if line1 == True:
+                header = [ x.strip('\r\n') for x in line.readline().split(';') ]
                 output.write('\t'.join(['sample', 'block', 'column', 'row']) + '\t' + '\t'.join([ x.strip('"') for x in [re.sub('\s', '_', x) for x in header[1:len(header)]] ]) + '\n')
                 line1 = False
             for out in data:
