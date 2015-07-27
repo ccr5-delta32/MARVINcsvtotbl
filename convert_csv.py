@@ -23,7 +23,8 @@ for file in files:
             with open('indiv_seeds_processed.tbl', 'wb') as output:
                 output.write('\t'.join(['sample', 'block', 'column', 'row']) + '\t' + '\t'.join([ x.strip('"') for x in [re.sub('\s', '_', x) for x in header[1:len(header)]] ]) + '\n')
             line1 = False
-        
+        else:
+            line.next()
         data = [[ re.sub(',', '.', x.strip('\r\n')) for x in y.split(';')] for y in line ] 
         sample = [ x.strip('.csv') for x in file.split(' ') ]
         
